@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeline-sync
+  labels:
+    app: timeline-sync
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: timeline-sync
+  template:
+    metadata:
+      labels:
+        app: timeline-sync
+    spec:
+      containers:
+        - name: timeline-sync
+          image: gcr.io/pebble-rebirth/timeline-sync:g5f41abe
+          ports:
+            - containerPort: 8080
+          env:
+          - name: PORT
+            value: "8080"
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: url_timeline
+          - name: DOMAIN_ROOT
+            value: rebble.io
+          - name: HONEYCOMB_KEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycomb
+                key: key
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: auth-secret-key
+                key: key
+          - name: SERVER_NAME
+            value: timeline-sync.rebble.io
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 128Mi
+            requests:
+              cpu: 500m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeline-sync
+spec:
+  selector:
+    app: timeline-sync
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080

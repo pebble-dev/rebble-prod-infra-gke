@@ -29,3 +29,17 @@ spec:
             backend:
               serviceName: auth
               servicePort: 8080
+    - host: timeline-sync.rebble.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: timeline-sync
+              servicePort: 8080
+    - host: timeline-api.rebble.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: timeline-sync
+              servicePort: 8080
