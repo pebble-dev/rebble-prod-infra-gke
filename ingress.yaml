@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rebble-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: rebble-ingress-ipv4
+    networking.gke.io/managed-certificates: cohorts-rebble-io
+spec:
+  rules:
+    - host: cohorts.rebble.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: cohorts
+              servicePort: 8080

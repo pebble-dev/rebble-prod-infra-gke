@@ -1,0 +1,99 @@
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: cohorts-rebble-io
+spec:
+  domains:
+    - cohorts.rebble.io
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cohorts
+  labels:
+    app: cohorts
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cohorts
+  template:
+    metadata:
+      labels:
+        app: cohorts
+    spec:
+      containers:
+        - name: cohorts
+          image: gcr.io/pebble-rebirth/cohorts@sha256:05f505d66b761aa2e3806ccf0a9f7359a62290cd685ed484679b997a5ff40178
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: APPSTORE_API_URL
+              value: https://appstore-api.rebble.io
+            - name: APPSTORE_URL
+              value: https://apps.rebble.io
+            - name: ASR_ROOT
+              value: asr.rebble.io
+            - name: COHORTS_URL
+              value: https://cohorts.rebble.io
+            - name: DOMAIN_ROOT
+              value: rebble.io
+            - name: HONEYCOMB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb
+                  key: key
+            - name: LANGUAGE_PACK_URL
+              value: https://lp.rebble.io
+            - name: REBBLE_AUTH
+              value: https://auth.rebble.io
+            - name: REBBLE_CONSUMER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rebble-consumer
+                  key: key
+            - name: REBBLE_CONSUMER_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rebble-consumer
+                  key: secret
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-key
+                  key: key
+            - name: WEATHER_URL
+              value: https://weather.rebble.io
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 1
+            periodSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cohorts
+spec:
+  selector:
+    app: cohorts
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
