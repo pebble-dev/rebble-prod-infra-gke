@@ -4,7 +4,7 @@ metadata:
   name: rebble-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: rebble-ingress-ipv4
-    networking.gke.io/managed-certificates: cohorts-rebble-io
+    networking.gke.io/managed-certificates: cohorts-rebble-io, boot-rebble-io
 spec:
   rules:
     - host: cohorts.rebble.io
@@ -13,4 +13,11 @@ spec:
           - path: /*
             backend:
               serviceName: cohorts
+              servicePort: 8080
+    - host: boot.rebble.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: boot
               servicePort: 8080
