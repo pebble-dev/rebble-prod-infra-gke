@@ -1,0 +1,154 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: gcr.io/pebble-rebirth/auth@sha256:e9e55eb453b88157d1fe5eb68539f4deff176416a02c8a0fe1ba833e87cd9aed
+          ports:
+            - containerPort: 8080
+          env:
+          - name: PORT
+            value: "8080"
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: url
+          - name: DOMAIN_ROOT
+            value: rebble.io
+          - name: FACEBOOK_CONSUMER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: oauth-facebook
+                key: key
+          - name: FACEBOOK_CONSUMER_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oauth-facebook
+                key: secret
+          - name: GITHUB_CONSUMER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: oauth-github
+                key: key
+          - name: GITHUB_CONSUMER_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oauth-github
+                key: secret
+          - name: GOOGLE_CONSUMER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: oauth-google
+                key: key
+          - name: GOOGLE_CONSUMER_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oauth-google
+                key: secret
+          - name: HONEYCOMB_KEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycomb
+                key: key
+          - name: PEBBLE_CONSUMER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: oauth-pebble
+                key: key
+          - name: PEBBLE_CONSUMER_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oauth-pebble
+                key: secret
+          - name: REDIS_URL
+            valueFrom:
+              secretKeyRef:
+                name: redis
+                key: url
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: auth-secret-key
+                key: key
+          - name: SERVER_NAME
+            value: auth.rebble.io
+          - name: STRIPE_ANNUAL_PLAN
+            valueFrom:
+              configMapKeyRef:
+                name: stripe-plans
+                key: annual_plan
+          - name: STRIPE_MONTHLY_PLAN
+            valueFrom:
+              configMapKeyRef:
+                name: stripe-plans
+                key: monthly_plan
+          - name: STRIPE_PUBLIC_KEY
+            valueFrom:
+              secretKeyRef:
+                name: stripe
+                key: public_key
+          - name: STRIPE_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: stripe
+                key: secret_key
+          - name: STRIPE_WEBHOOK_KEY
+            valueFrom:
+              secretKeyRef:
+                name: stripe
+                key: webhook_key
+          - name: TWITTER_CONSUMER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: oauth-twitter
+                key: key
+          - name: TWITTER_CONSUMER_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: oauth-twitter
+                key: secret
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 128Mi
+            requests:
+              cpu: 500m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth
+spec:
+  selector:
+    app: auth
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080

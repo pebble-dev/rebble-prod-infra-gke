@@ -22,3 +22,10 @@ spec:
             backend:
               serviceName: boot
               servicePort: 8080
+    - host: auth.rebble.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: auth
+              servicePort: 8080
