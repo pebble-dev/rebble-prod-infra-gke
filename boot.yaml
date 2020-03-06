@@ -1,11 +1,3 @@
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: boot-rebble-io
-spec:
-  domains:
-    - boot.rebble.io
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:

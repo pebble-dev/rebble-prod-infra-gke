@@ -4,8 +4,9 @@ metadata:
   name: rebble-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: rebble-ingress-ipv4
-    networking.gke.io/managed-certificates: cohorts-rebble-io, boot-rebble-io
 spec:
+  tls:
+    - secretName: star-rebble-io
   rules:
     - host: cohorts.rebble.io
       http:

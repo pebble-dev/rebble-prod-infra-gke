@@ -1,11 +1,3 @@
-apiVersion: networking.gke.io/v1beta1
-kind: ManagedCertificate
-metadata:
-  name: cohorts-rebble-io
-spec:
-  domains:
-    - cohorts.rebble.io
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
