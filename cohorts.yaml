@@ -69,13 +69,13 @@ spec:
             httpGet:
               path: /heartbeat
               port: 8080
-            initialDelaySeconds: 1
-            periodSeconds: 1
+            initialDelaySeconds: 3
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /heartbeat
               port: 8080
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
             periodSeconds: 10
 ---
 apiVersion: v1
