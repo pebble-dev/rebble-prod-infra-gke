@@ -63,7 +63,7 @@ spec:
               cpu: 500m
               memory: 128Mi
             requests:
-              cpu: 100m
+              cpu: 200m
               memory: 128Mi
           readinessProbe:
             httpGet:
