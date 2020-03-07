@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: boot
-          image: gcr.io/pebble-rebirth/boot:ge0dab55
+          image: gcr.io/pebble-rebirth/boot:g53a8080
           ports:
             - containerPort: 8080
           env:
@@ -40,6 +40,8 @@ spec:
             - name: LANGUAGE_PACK_URL
               value: https://lp.rebble.io
             - name: REBBLE_AUTH_URL
+              value: https://auth.rebble.io
+            - name: REBBLE_AUTH_INT_URL
               value: "http://auth:8080"
             - name: OAUTHLIB_INSECURE_TRANSPORT
               value: "1"

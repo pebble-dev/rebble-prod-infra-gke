@@ -39,7 +39,7 @@ spec:
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
-                name: auth-secret-key
+                name: secret-key
                 key: key
           - name: SERVER_NAME
             value: timeline-sync.rebble.io
