@@ -5,7 +5,7 @@ metadata:
   labels:
     app: auth
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: auth
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: gcr.io/pebble-rebirth/auth@sha256:e9e55eb453b88157d1fe5eb68539f4deff176416a02c8a0fe1ba833e87cd9aed
+          image: gcr.io/pebble-rebirth/auth:gf6beb4d
           ports:
             - containerPort: 8080
           env:
