@@ -40,7 +40,7 @@ spec:
             - name: LANGUAGE_PACK_URL
               value: https://lp.rebble.io
             - name: REBBLE_AUTH
-              value: https://auth.rebble.io
+              value: "http://auth:8080"
             - name: REBBLE_CONSUMER_KEY
               valueFrom:
                 secretKeyRef:
