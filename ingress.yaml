@@ -7,6 +7,9 @@ metadata:
 spec:
   tls:
     - secretName: star-rebble-io
+    - secretName: star-asr-rebble-io
+      hosts:
+        - "*.asr.rebble.io"
   rules:
     - host: cohorts.rebble.io
       http:
@@ -42,4 +45,11 @@ spec:
           - path: /*
             backend:
               serviceName: timeline-sync
+              servicePort: 8080
+    - host: "*.asr.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: asr
               servicePort: 8080
