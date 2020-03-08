@@ -77,7 +77,7 @@ spec:
     - protocol: TCP
       port: 8080
 ---
-apiVersion: v1
+apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: timeline-sync-maintenance
@@ -118,3 +118,4 @@ spec:
                   key: key
             - name: SERVER_NAME
               value: timeline-sync.rebble.io
+          restartPolicy: OnFailure
