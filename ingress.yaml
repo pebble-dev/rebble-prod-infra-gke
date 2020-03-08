@@ -53,3 +53,10 @@ spec:
             backend:
               serviceName: asr
               servicePort: 8080
+    - host: "lp.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: lp
+              servicePort: 8080

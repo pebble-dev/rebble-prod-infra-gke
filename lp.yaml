@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lp
+  labels:
+    app: lp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lp
+  template:
+    metadata:
+      labels:
+        app: lp
+    spec:
+      containers:
+        - name: lp
+          image: gcr.io/pebble-rebirth/lp@sha256:d2f62638e4f98e156d5e22c52fd43305c25f8eca24cb16c38a382c40137de4c6
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: HONEYCOMB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb
+                  key: key
+          resources:
+            limits:
+              cpu: 300m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lp
+spec:
+  selector:
+    app: lp
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
