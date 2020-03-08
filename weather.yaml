@@ -1,36 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: timeline-sync
+  name: weather
   labels:
-    app: timeline-sync
+    app: weather
 spec:
   replicas: 4
   selector:
     matchLabels:
-      app: timeline-sync
+      app: weather
   template:
     metadata:
       labels:
-        app: timeline-sync
+        app: weather
     spec:
       containers:
-        - name: timeline-sync
-          image: gcr.io/pebble-rebirth/timeline-sync:gec26250
+        - name: weather
+          image: gcr.io/pebble-rebirth/weather:g0cc1e75
           ports:
             - containerPort: 8080
           env:
           - name: PORT
             value: "8080"
-          - name: REBBLE_AUTH_URL
+          - name: REBBLE_AUTH_URL_INT
             value: "http://auth:8080"
-          - name: DATABASE_URL
+          - name: IBM_API_ROOT
             valueFrom:
               secretKeyRef:
-                name: postgres
-                key: url_timeline
-          - name: DOMAIN_ROOT
-            value: rebble.io
+                name: ibm-weather-api
+                key: url
           - name: HONEYCOMB_KEY
             valueFrom:
               secretKeyRef:
@@ -42,7 +40,7 @@ spec:
                 name: secret-key
                 key: key
           - name: SERVER_NAME
-            value: timeline-sync.rebble.io
+            value: weather.rebble.io
           resources:
             limits:
               cpu: 500m
@@ -68,10 +66,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: timeline-sync
+  name: weather
 spec:
   selector:
-    app: timeline-sync
+    app: weather
   type: NodePort
   ports:
     - protocol: TCP

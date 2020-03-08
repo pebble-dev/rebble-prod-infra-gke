@@ -60,3 +60,10 @@ spec:
             backend:
               serviceName: lp
               servicePort: 8080
+    - host: "weather.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: weather
+              servicePort: 8080
