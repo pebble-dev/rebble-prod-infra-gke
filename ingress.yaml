@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: rebble-ingress
   annotations:
+    kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.global-static-ip-name: rebble-ingress-ipv4
 spec:
   tls:
@@ -75,6 +76,13 @@ spec:
               serviceName: notif-app-icons
               servicePort: 8080
     - host: "appstore-api.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: appstore-api
+              servicePort: 8080
+    - host: "ios-appstore-api.rebble.io"
       http:
         paths:
           - path: /*
