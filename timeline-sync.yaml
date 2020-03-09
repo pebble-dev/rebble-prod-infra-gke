@@ -76,3 +76,46 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: timeline-sync-maintenance
+spec:
+  schedule: "0 4 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: timeline-sync-maintenance
+            image: gcr.io/pebble-rebirth/timeline-sync:gec26250
+            args:
+            - /usr/local/bin/python3
+            - -c
+            - "import timeline_sync; timeline_sync.nightly_maintenance()"
+            env:
+            - name: PORT
+              value: "8080"
+            - name: REBBLE_AUTH_URL
+              value: "http://auth:8080"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: url_timeline
+            - name: DOMAIN_ROOT
+              value: rebble.io
+            - name: HONEYCOMB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb
+                  key: key
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-key
+                  key: key
+            - name: SERVER_NAME
+              value: timeline-sync.rebble.io
+          restartPolicy: OnFailure
