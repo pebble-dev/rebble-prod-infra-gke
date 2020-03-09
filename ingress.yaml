@@ -74,3 +74,10 @@ spec:
             backend:
               serviceName: notif-app-icons
               servicePort: 8080
+    - host: "appstore-api.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: appstore-api
+              servicePort: 8080

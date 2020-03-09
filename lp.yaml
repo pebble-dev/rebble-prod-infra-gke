@@ -29,10 +29,10 @@ spec:
                   key: key
           resources:
             limits:
-              cpu: 300m
+              cpu: 100m
               memory: 128Mi
             requests:
-              cpu: 100m
+              cpu: 20m
               memory: 128Mi
           readinessProbe:
             httpGet:

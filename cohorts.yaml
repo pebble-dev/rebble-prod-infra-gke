@@ -60,10 +60,10 @@ spec:
               value: https://weather.rebble.io
           resources:
             limits:
-              cpu: 500m
+              cpu: 100m
               memory: 128Mi
             requests:
-              cpu: 200m
+              cpu: 40m
               memory: 128Mi
           readinessProbe:
             httpGet:
