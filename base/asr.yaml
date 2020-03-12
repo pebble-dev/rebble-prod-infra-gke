@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lp
+  name: asr
   labels:
-    app: lp
+    app: asr
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
-      app: lp
+      app: asr
   template:
     metadata:
       labels:
-        app: lp
+        app: asr
     spec:
       containers:
-        - name: lp
-          image: gcr.io/pebble-rebirth/lp:gd1b3670
+        - name: asr
+          image: gcr.io/pebble-rebirth/asr@sha256:e2a1848b7c4a3fff19969a1d146df9ad409cbe9afb9715841b99d1f225f95975
           ports:
             - containerPort: 8080
           env:
@@ -27,12 +27,18 @@ spec:
                 secretKeyRef:
                   name: honeycomb
                   key: key
+                  optional: true
+            - name: SPEECH_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: google-asr
+                  key: key
           resources:
             limits:
-              cpu: 100m
+              cpu: 200m
               memory: 128Mi
             requests:
-              cpu: 20m
+              cpu: 50m
               memory: 128Mi
           readinessProbe:
             httpGet:
@@ -52,10 +58,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lp
+  name: asr
 spec:
   selector:
-    app: lp
+    app: asr
   type: NodePort
   ports:
     - protocol: TCP

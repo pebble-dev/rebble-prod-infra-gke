@@ -1,0 +1,12 @@
+bases:
+  - ../../base
+  - ../../nginx
+resources:
+  - cert-manager/
+  - certs/prod/certs.yaml
+  - certs/prod/clusterissuer.yaml
+  - certs/staging/cert.yaml
+  - certs/staging/clusterissuer.yaml
+  - ingress.yaml
+  - ingress-nginx.yaml
+  - config.yaml

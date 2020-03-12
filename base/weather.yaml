@@ -1,35 +1,50 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notif-app-icons
+  name: weather
   labels:
-    app: notif-app-icons
+    app: weather
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
-      app: notif-app-icons
+      app: weather
   template:
     metadata:
       labels:
-        app: notif-app-icons
+        app: weather
     spec:
       containers:
-        - name: notif-app-icons
-          image: gcr.io/pebble-rebirth/notif-app-icons:g2c71db0
+        - name: weather
+          image: gcr.io/pebble-rebirth/weather:g00433bc
           ports:
             - containerPort: 8080
           env:
-            - name: PORT
-              value: "8080"
-            - name: HONEYCOMB_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: honeycomb
-                  key: key
+          - name: PORT
+            value: "8080"
+          - name: REBBLE_AUTH_URL_INT
+            value: "http://auth:8080"
+          - name: IBM_API_ROOT
+            valueFrom:
+              secretKeyRef:
+                name: ibm-weather-api
+                key: url
+          - name: HONEYCOMB_KEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycomb
+                key: key
+                optional: true
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: secret-key
+                key: key
+          - name: SERVER_NAME
+            value: weather.rebble.io
           resources:
             limits:
-              cpu: 200m
+              cpu: 250m
               memory: 128Mi
             requests:
               cpu: 50m
@@ -52,10 +67,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: notif-app-icons
+  name: weather
 spec:
   selector:
-    app: notif-app-icons
+    app: weather
   type: NodePort
   ports:
     - protocol: TCP

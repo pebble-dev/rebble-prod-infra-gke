@@ -1,0 +1,11 @@
+# Kustomize patch.
+# Add the GCP Workload Identity service account annotation to the
+# standard cert-manager service account
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cert-manager
+  namespace: "cert-manager"
+annotations:
+  iam.gke.io/gcp-service-account: dns01-solver@pebble-rebirth.iam.gserviceaccount.com

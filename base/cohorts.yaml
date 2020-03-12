@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: asr
+  name: cohorts
   labels:
-    app: asr
+    app: cohorts
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: asr
+      app: cohorts
   template:
     metadata:
       labels:
-        app: asr
+        app: cohorts
     spec:
       containers:
-        - name: asr
-          image: gcr.io/pebble-rebirth/asr@sha256:e2a1848b7c4a3fff19969a1d146df9ad409cbe9afb9715841b99d1f225f95975
+        - name: cohorts
+          image: gcr.io/pebble-rebirth/cohorts:g26078d4
           ports:
             - containerPort: 8080
           env:
@@ -27,17 +27,15 @@ spec:
                 secretKeyRef:
                   name: honeycomb
                   key: key
-            - name: SPEECH_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: google-asr
-                  key: key
+                  optional: true
+            - name: REBBLE_AUTH
+              value: http://auth:8080
           resources:
             limits:
-              cpu: 200m
+              cpu: 100m
               memory: 128Mi
             requests:
-              cpu: 50m
+              cpu: 40m
               memory: 128Mi
           readinessProbe:
             httpGet:
@@ -57,10 +55,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: asr
+  name: cohorts
 spec:
   selector:
-    app: asr
+    app: cohorts
   type: NodePort
   ports:
     - protocol: TCP

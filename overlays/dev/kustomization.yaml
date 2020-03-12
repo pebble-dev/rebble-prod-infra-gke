@@ -1,0 +1,8 @@
+bases:
+- ../../base
+- ingress
+resources:
+- config.yaml
+- postgres.yaml
+patchesStrategicMerge:
+- single-replica.yaml

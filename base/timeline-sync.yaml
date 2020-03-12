@@ -30,12 +30,16 @@ spec:
                 name: postgres
                 key: url_timeline
           - name: DOMAIN_ROOT
-            value: rebble.io
+            valueFrom:
+              configMapKeyRef:
+                name: rebble-config
+                key: DOMAIN_ROOT
           - name: HONEYCOMB_KEY
             valueFrom:
               secretKeyRef:
                 name: honeycomb
                 key: key
+                optional: true
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:

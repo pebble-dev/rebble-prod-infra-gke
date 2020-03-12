@@ -64,6 +64,7 @@ spec:
               secretKeyRef:
                 name: honeycomb
                 key: key
+                optional: true
           - name: PEBBLE_CONSUMER_KEY
             valueFrom:
               secretKeyRef:

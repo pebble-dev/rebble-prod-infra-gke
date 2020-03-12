@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rebble-config
+data:
+  APPSTORE_ROOT: http://localhost:8080/appstore
+  IMAGE_ROOT: https://assets.rebble.io
+  PBW_ROOT: https://pbws.rebble.io/pbw
+  APPSTORE_API_ROOT: http://localhost:8080/appstore
+  ASR_ROOT: http://localhost:8080/asr
+  COHORTS_ROOT: http://localhost:8080/cohorts
+  DOMAIN_ROOT: rebble.io
+  LANGUAGE_PACK_ROOT: http://localhost:8080/lp
+  REBBLE_AUTH_ROOT: http://localhost:8080/auth
+  WEATHER_ROOT: http://localhost:8080/weather

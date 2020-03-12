@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rebble-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /cohorts/?(.*)
+            backend:
+              serviceName: cohorts
+              servicePort: 8080
+          - path: /boot/?(.*)
+            backend:
+              serviceName: boot
+              servicePort: 8080
+          - path: /auth/?(.*)
+            backend:
+              serviceName: auth
+              servicePort: 8080
+          - path: /timeline-sync/?(.*)
+            backend:
+              serviceName: timeline-sync
+              servicePort: 8080
+          - path: /timeline-api/?(.*)
+            backend:
+              serviceName: timeline-sync
+              servicePort: 8080
+          - path: /asr/?(.*)
+            backend:
+              serviceName: asr
+              servicePort: 8080
+          - path: /lp/?(.*)
+            backend:
+              serviceName: lp
+              servicePort: 8080
+          - path: /weather/?(.*)
+            backend:
+              serviceName: weather
+              servicePort: 8080
+          - path: /notif-app-icons/?(.*)
+            backend:
+              serviceName: notif-app-icons
+              servicePort: 8080
+          - path: /appstore-api/?(.*)
+            backend:
+              serviceName: appstore-api
+              servicePort: 8080

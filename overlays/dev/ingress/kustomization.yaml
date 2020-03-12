@@ -1,0 +1,7 @@
+bases:
+  - ../../../nginx
+resources:
+  - ingress.yaml
+  - nginx-service.yaml
+patchesStrategicMerge:
+  - nginx-force-port-8080.yaml

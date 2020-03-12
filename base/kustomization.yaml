@@ -1,0 +1,11 @@
+kind: Kustomization
+resources: 
+- appstore-api.yaml
+- asr.yaml
+- auth.yaml
+- boot.yaml
+- cohorts.yaml
+- lp.yaml
+- notif-app-icons.yaml
+- timeline-sync.yaml
+- weather.yaml

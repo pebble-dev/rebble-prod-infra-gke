@@ -1,46 +1,72 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cohorts
+  name: boot
   labels:
-    app: cohorts
+    app: boot
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: cohorts
+      app: boot
   template:
     metadata:
       labels:
-        app: cohorts
+        app: boot
     spec:
       containers:
-        - name: cohorts
-          image: gcr.io/pebble-rebirth/cohorts:g26078d4
+        - name: boot
+          image: gcr.io/pebble-rebirth/boot:gefc3c13
           ports:
             - containerPort: 8080
           env:
             - name: PORT
               value: "8080"
             - name: APPSTORE_API_URL
-              value: https://appstore-api.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: APPSTORE_API_ROOT
             - name: APPSTORE_URL
-              value: https://apps.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: APPSTORE_ROOT
             - name: ASR_ROOT
-              value: asr.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: ASR_ROOT
             - name: COHORTS_URL
-              value: https://cohorts.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: COHORTS_ROOT
             - name: DOMAIN_ROOT
-              value: rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: DOMAIN_ROOT
             - name: HONEYCOMB_KEY
               valueFrom:
                 secretKeyRef:
                   name: honeycomb
                   key: key
+                  optional: true
             - name: LANGUAGE_PACK_URL
-              value: https://lp.rebble.io
-            - name: REBBLE_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: LANGUAGE_PACK_ROOT
+            - name: REBBLE_AUTH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: AUTH_ROOT
+            - name: REBBLE_AUTH_INT_URL
               value: "http://auth:8080"
+            - name: OAUTHLIB_INSECURE_TRANSPORT
+              value: "1"
             - name: REBBLE_CONSUMER_KEY
               valueFrom:
                 secretKeyRef:
@@ -57,13 +83,16 @@ spec:
                   name: secret-key
                   key: key
             - name: WEATHER_URL
-              value: https://weather.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: WEATHER_ROOT
           resources:
             limits:
-              cpu: 100m
+              cpu: 200m
               memory: 128Mi
             requests:
-              cpu: 40m
+              cpu: 20m
               memory: 128Mi
           readinessProbe:
             httpGet:
@@ -83,10 +112,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cohorts
+  name: boot
 spec:
   selector:
-    app: cohorts
+    app: boot
   type: NodePort
   ports:
     - protocol: TCP

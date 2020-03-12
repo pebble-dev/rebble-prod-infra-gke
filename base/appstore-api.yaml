@@ -27,32 +27,45 @@ spec:
                 secretKeyRef:
                   name: honeycomb
                   key: key
+                  optional: true
             - name: ALGOLIA_ADMIN_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: algolia
                   key: admin-api-key
+                  optional: true
             - name: ALGOLIA_APP_ID
               valueFrom:
                 secretKeyRef:
                   name: algolia
                   key: app-id
+                  optional: true
             - name: ALGOLIA_INDEX
               valueFrom:
                 secretKeyRef:
                   name: algolia
                   key: index
+                  optional: true
             - name: APPSTORE_ROOT
-              value: https://apps.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: APPSTORE_ROOT
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
                   name: appstore-postgres
                   key: url
             - name: IMAGE_ROOT
-              value: https://assets.rebble.io
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: IMAGE_ROOT
             - name: PBW_ROOT
-              value: https://pbws.rebble.io/pbw
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: PBW_ROOT
             - name: REBBLE_AUTH_URL
               value: http://auth:8080
             - name: SECRET_KEY

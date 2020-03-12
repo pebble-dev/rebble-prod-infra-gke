@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rebble-config
+data:
+  APPSTORE_ROOT: https://apps.rebble.io
+  IMAGE_ROOT: https://assets.rebble.io
+  PBW_ROOT: https://pbws.rebble.io/pbw
+  APPSTORE_API_ROOT: https://appstore-api.rebble.io
+  ASR_ROOT: https://appstore-api.rebble.io
+  COHORTS_ROOT: https://cohorts.rebble.io
+  DOMAIN_ROOT: rebble.io
+  LANGUAGE_PACK_ROOT: https://lp.rebble.io
+  REBBLE_AUTH_ROOT: https://auth.rebble.io
+  WEATHER_ROOT: https://weather.rebble.io

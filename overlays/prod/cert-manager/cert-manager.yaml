@@ -1,3 +1,4 @@
+# https://github.com/jetstack/cert-manager/releases/download/v0.13.1/cert-manager.yaml
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
@@ -5567,8 +5568,6 @@ kind: ServiceAccount
 metadata:
   name: cert-manager
   namespace: "cert-manager"
-  annotations:
-    iam.gke.io/gcp-service-account: dns01-solver@pebble-rebirth.iam.gserviceaccount.com
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
