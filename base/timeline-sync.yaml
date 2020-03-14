@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: timeline-sync
-          image: gcr.io/pebble-rebirth/timeline-sync:g5217e24
+          image: gcr.io/pebble-rebirth/timeline-sync
           ports:
             - containerPort: 8080
           env:
@@ -93,7 +93,7 @@ spec:
         spec:
           containers:
           - name: timeline-sync-maintenance
-            image: gcr.io/pebble-rebirth/timeline-sync:gec26250
+            image: gcr.io/pebble-rebirth/timeline-sync
             args:
             - /usr/local/bin/python3
             - -c

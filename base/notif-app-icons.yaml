@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notif-app-icons
-          image: gcr.io/pebble-rebirth/notif-app-icons:g2c71db0
+          image: gcr.io/pebble-rebirth/notif-app-icons
           ports:
             - containerPort: 8080
           env:
