@@ -70,21 +70,25 @@ sanity-check() {
   ensure-jq
 }
 
+kind-kubectl() {
+  kubectl --context=kind-rebble "$@"
+}
+
 prepare-cluster() {
   echo "Creating kind cluster 'rebble'..."
   result=0
   kind create cluster --config="${ROOT_DIR}/kind.yaml" --name=rebble || fail "Cluster creation failed"
   echo "Applying dev configuration to cluster..."
-  kubectl apply --context=kind-rebble -k "${ROOT_DIR}/overlays/dev" || fail "Applying cluster config failed"
+  kind-kubectl apply -k "${ROOT_DIR}/overlays/dev" || fail "Applying cluster config failed"
 }
 
 create-databases() {
   # We need three users: appstore, timeline and auth
   echo "Creating required postgres databases..."
   result=0
-  kubectl exec postgres-0 -- psql -U postgres -c "CREATE DATABASE auth;" -c "CREATE USER auth WITH ENCRYPTED PASSWORD 'auth'; GRANT ALL PRIVILEGES ON DATABASE auth TO auth;" || result=$?
-  kubectl exec postgres-0 -- psql -U postgres -c "CREATE DATABASE appstore;" -c "CREATE USER appstore WITH ENCRYPTED PASSWORD 'appstore'; GRANT ALL PRIVILEGES ON DATABASE appstore TO appstore;" || result=$?
-  kubectl exec postgres-0 -- psql -U postgres -c "CREATE DATABASE timeline;" -c "CREATE USER timeline WITH ENCRYPTED PASSWORD 'timeline'; GRANT ALL PRIVILEGES ON DATABASE timeline TO timeline;" || result=$?
+  kind-kubectl exec postgres-0 -- psql -U postgres -c "CREATE DATABASE auth;" -c "CREATE USER auth WITH ENCRYPTED PASSWORD 'auth'; GRANT ALL PRIVILEGES ON DATABASE auth TO auth;" || result=$?
+  kind-kubectl exec postgres-0 -- psql -U postgres -c "CREATE DATABASE appstore;" -c "CREATE USER appstore WITH ENCRYPTED PASSWORD 'appstore'; GRANT ALL PRIVILEGES ON DATABASE appstore TO appstore;" || result=$?
+  kind-kubectl exec postgres-0 -- psql -U postgres -c "CREATE DATABASE timeline;" -c "CREATE USER timeline WITH ENCRYPTED PASSWORD 'timeline'; GRANT ALL PRIVILEGES ON DATABASE timeline TO timeline;" || result=$?
   if (( $result != 0 )); then
     fail "Creating users and databases failed."
   fi
@@ -104,7 +108,7 @@ wait_for_pod_state() {
   while true
   do
     sleep 2
-    pod_status="$(kubectl get pod "$pod" -o=jsonpath='{.status.phase}' 2>/dev/null)"
+    pod_status="$(kind-kubectl get pod "$pod" -o=jsonpath='{.status.phase}' 2>/dev/null)"
     echo "Current $pod status: $pod_status"
     if [ "$pod_status" = "$state" ]; then
       break
@@ -118,13 +122,13 @@ prepare-db() {
   echo "Preparing ${deployment} db..."
   # run the migration inside the image
   echo "Creating migration pod..."
-  kubectl get deployment "$deployment" -o json | "$JQ" --arg deployment "$deployment" --arg app "$app" -r -f "$ROOT_DIR/local-dev/deployment-to-db-upgrade.jq" | kubectl apply -f -
+  kind-kubectl get deployment "$deployment" -o json | "$JQ" --arg deployment "$deployment" --arg app "$app" -r -f "$ROOT_DIR/local-dev/deployment-to-db-upgrade.jq" | kind-kubectl apply -f -
   echo "Waiting for pod to complete..."
   # TODO: this will wait forever if it doesn't succeed
   wait_for_pod_state "create-${deployment}-db" "Succeeded"
-  kubectl logs "create-${deployment}-db"
+  kind-kubectl logs "create-${deployment}-db"
   echo "Cleaning up..."
-  kubectl delete pod "create-${deployment}-db"
+  kind-kubectl delete pod "create-${deployment}-db"
   echo "Pod complete"
 }
 
