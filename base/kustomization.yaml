@@ -11,20 +11,20 @@ resources:
 - weather.yaml
 images:
 - name: gcr.io/pebble-rebirth/appstore-api
-  newTag: g0e132e8
+  newTag: gb88f4a2
 - name: gcr.io/pebble-rebirth/asr
   digest: sha256:e2a1848b7c4a3fff19969a1d146df9ad409cbe9afb9715841b99d1f225f95975
 - name: gcr.io/pebble-rebirth/auth
-  newTag: g8a43a4b
+  newTag: g71ee744
 - name: gcr.io/pebble-rebirth/boot
-  newTag: gefc3c13
+  newTag: g26ae1f6
 - name: gcr.io/pebble-rebirth/cohorts
-  newTag: g26078d4
+  newTag: g819dc9c
 - name: gcr.io/pebble-rebirth/lp
-  newTag: gd1b3670
+  newTag: g7c35b45
 - name: gcr.io/pebble-rebirth/notif-app-icons
-  newTag: g2c71db0
+  newTag: gc36d944
 - name: gcr.io/pebble-rebirth/timeline-sync
-  newTag: g5217e24
+  newTag: g203b75e
 - name: gcr.io/pebble-rebirth/weather
   newTag: g00433bc  
