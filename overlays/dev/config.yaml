@@ -6,7 +6,7 @@ data:
   APPSTORE_ROOT: http://localhost:8080/appstore
   IMAGE_ROOT: https://assets.rebble.io
   PBW_ROOT: https://pbws.rebble.io/pbw
-  APPSTORE_API_ROOT: http://localhost:8080/appstore
+  APPSTORE_API_ROOT: http://localhost:8080/appstore-api
   ASR_ROOT: http://localhost:8080/asr
   COHORTS_ROOT: http://localhost:8080/cohorts
   DOMAIN_ROOT: rebble.io
@@ -14,4 +14,5 @@ data:
   AUTH_ROOT: http://localhost:8080/auth
   AUTH_ROOT_INT: http://auth:8080/auth
   WEATHER_ROOT: http://localhost:8080/weather
+  TIMELINE_URL: http://localhost:8080/timeline-sync
   FLASK_ENV: development

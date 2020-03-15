@@ -80,6 +80,11 @@ spec:
                 configMapKeyRef:
                   name: rebble-config
                   key: AUTH_ROOT_INT
+            - name: REBBLE_TIMELINE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: TIMELINE_URL
             - name: OAUTHLIB_INSECURE_TRANSPORT
               value: "1"
             - name: REBBLE_CONSUMER_KEY

@@ -14,4 +14,5 @@ data:
   AUTH_ROOT: https://auth.rebble.io
   AUTH_ROOT_INT: http://auth:8080
   WEATHER_ROOT: https://weather.rebble.io
+  TIMELINE_URL: https://timeline-sync.rebble.io
   FLASK_ENV: production
