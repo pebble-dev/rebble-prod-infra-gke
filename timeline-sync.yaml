@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: timeline-sync
-          image: gcr.io/pebble-rebirth/timeline-sync:g5217e24
+          image: gcr.io/pebble-rebirth/timeline-sync:ga6df574
           ports:
             - containerPort: 8080
           env:
@@ -31,11 +31,13 @@ spec:
                 key: url_timeline
           - name: DOMAIN_ROOT
             value: rebble.io
-          - name: HONEYCOMB_KEY
+          - name: HONEYCOMB_WRITEKEY
             valueFrom:
               secretKeyRef:
                 name: honeycomb
                 key: key
+          - name: HONEYCOMB_DATASET
+            value: rws
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
@@ -89,7 +91,7 @@ spec:
         spec:
           containers:
           - name: timeline-sync-maintenance
-            image: gcr.io/pebble-rebirth/timeline-sync:gec26250
+            image: gcr.io/pebble-rebirth/timeline-sync:ga6df574
             args:
             - /usr/local/bin/python3
             - -c
@@ -106,7 +108,7 @@ spec:
                   key: url_timeline
             - name: DOMAIN_ROOT
               value: rebble.io
-            - name: HONEYCOMB_KEY
+            - name: HONEYCOMB_WRITEKEY
               valueFrom:
                 secretKeyRef:
                   name: honeycomb
