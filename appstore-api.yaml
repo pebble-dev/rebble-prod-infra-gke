@@ -16,17 +16,19 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:g0e132e8
+          image: gcr.io/pebble-rebirth/appstore-api:gbaf9666
           ports:
             - containerPort: 8080
           env:
             - name: PORT
               value: "8080"
-            - name: HONEYCOMB_KEY
+            - name: HONEYCOMB_WRITEKEY
               valueFrom:
                 secretKeyRef:
                   name: honeycomb
                   key: key
+            - name: HONEYCOMB_DATASET
+              value: rws
             - name: ALGOLIA_ADMIN_API_KEY
               valueFrom:
                 secretKeyRef:
