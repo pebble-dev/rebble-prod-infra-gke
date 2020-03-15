@@ -3,6 +3,7 @@ bases:
 - ingress
 resources:
 - config.yaml
+- secrets.yaml
 - postgres.yaml
 patchesStrategicMerge:
 - single-replica.yaml

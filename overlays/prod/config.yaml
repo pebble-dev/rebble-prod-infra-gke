@@ -11,5 +11,5 @@ data:
   COHORTS_ROOT: https://cohorts.rebble.io
   DOMAIN_ROOT: rebble.io
   LANGUAGE_PACK_ROOT: https://lp.rebble.io
-  REBBLE_AUTH_ROOT: https://auth.rebble.io
+  AUTH_ROOT: https://auth.rebble.io
   WEATHER_ROOT: https://weather.rebble.io
