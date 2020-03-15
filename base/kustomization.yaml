@@ -17,7 +17,7 @@ images:
 - name: gcr.io/pebble-rebirth/auth
   newTag: g71ee744
 - name: gcr.io/pebble-rebirth/boot
-  newTag: g26ae1f6
+  newTag: gd9d494e
 - name: gcr.io/pebble-rebirth/cohorts
   newTag: g819dc9c
 - name: gcr.io/pebble-rebirth/lp
