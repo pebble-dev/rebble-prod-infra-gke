@@ -9,3 +9,4 @@ resources:
 - redis.yaml
 patchesStrategicMerge:
 - single-replica.yaml
+- no-asr.yaml

@@ -1,0 +1,7 @@
+# We don't try to provide a viable asr setup.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asr
+spec:
+  replicas: 0
