@@ -138,9 +138,14 @@ prepare-dbs() {
   prepare-db timeline_sync "timeline-sync"
 }
 
+prepare-oauth-token() {
+  kind-kubectl exec postgres-0 -- psql -U postgres -d auth -c "INSERT INTO oauth_clients (name, client_id, client_secret, redirect_uris, is_confidential, default_scopes, is_rws) VALUES ('Rebble2', 'rebble-id', 'rebble-secret', '{http://localhost:8080/boot/auth/complete}', FALSE, '{pebble_token,pebble,profile}', TRUE);"
+}
+
 sanity-check
 prepare-cluster
 wait_for_db
 create-databases
 prepare-dbs
+prepare-oauth-token
 
