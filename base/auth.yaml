@@ -22,6 +22,12 @@ spec:
           env:
           - name: PORT
             value: "8080"
+          - name: SCRIPT_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: script-names
+                key: auth
+                optional: true
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
@@ -134,14 +140,14 @@ spec:
               memory: 128Mi
           readinessProbe:
             httpGet:
-              path: /heartbeat
+              path: /auth/heartbeat
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 20
             timeoutSeconds: 5
           livenessProbe:
             httpGet:
-              path: /heartbeat
+              path: /auth/heartbeat
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 20

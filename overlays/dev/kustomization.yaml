@@ -3,6 +3,7 @@ bases:
 - ingress
 resources:
 - config.yaml
+- script-names.yaml
 - secrets.yaml
 - postgres.yaml
 patchesStrategicMerge:

@@ -12,4 +12,5 @@ data:
   DOMAIN_ROOT: rebble.io
   LANGUAGE_PACK_ROOT: https://lp.rebble.io
   AUTH_ROOT: https://auth.rebble.io
+  AUTH_ROOT_INT: http://auth:8080
   WEATHER_ROOT: https://weather.rebble.io

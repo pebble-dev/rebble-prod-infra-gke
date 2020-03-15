@@ -22,6 +22,12 @@ spec:
           env:
             - name: PORT
               value: "8080"
+            - name: SCRIPT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: script-names
+                  key: boot
+                  optional: true
             - name: APPSTORE_API_URL
               valueFrom:
                 configMapKeyRef:
@@ -64,7 +70,10 @@ spec:
                   name: rebble-config
                   key: AUTH_ROOT
             - name: REBBLE_AUTH_INT_URL
-              value: "http://auth:8080"
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: AUTH_ROOT_INT
             - name: OAUTHLIB_INSECURE_TRANSPORT
               value: "1"
             - name: REBBLE_CONSUMER_KEY
@@ -96,14 +105,14 @@ spec:
               memory: 128Mi
           readinessProbe:
             httpGet:
-              path: /heartbeat
+              path: /boot/heartbeat
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 20
             timeoutSeconds: 5
           livenessProbe:
             httpGet:
-              path: /heartbeat
+              path: /boot/heartbeat
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 20

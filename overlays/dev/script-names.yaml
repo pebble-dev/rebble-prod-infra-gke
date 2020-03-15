@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: script-names
+data:
+  appstore-api: /appstore-api
+  asr: /asr
+  auth: /auth
+  boot: /boot
+  cohorts: /cohorts
+  lp: /lp
+  notif-app-icons: /notif-app-icons
+  timeline-sync: /timeline-sync
+  weather: /weather
