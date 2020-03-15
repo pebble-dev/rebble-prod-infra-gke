@@ -28,6 +28,12 @@ spec:
                   name: script-names
                   key: boot
                   optional: true
+            - name: FLASK_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: rebble-config
+                  key: FLASK_ENV
+                  optional: true
             - name: APPSTORE_API_URL
               valueFrom:
                 configMapKeyRef:

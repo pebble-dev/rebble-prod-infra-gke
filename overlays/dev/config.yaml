@@ -14,3 +14,4 @@ data:
   AUTH_ROOT: http://localhost:8080/auth
   AUTH_ROOT_INT: http://auth:8080/auth
   WEATHER_ROOT: http://localhost:8080/weather
+  FLASK_ENV: development
