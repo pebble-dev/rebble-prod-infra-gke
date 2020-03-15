@@ -6,5 +6,6 @@ resources:
 - script-names.yaml
 - secrets.yaml
 - postgres.yaml
+- redis.yaml
 patchesStrategicMerge:
 - single-replica.yaml
