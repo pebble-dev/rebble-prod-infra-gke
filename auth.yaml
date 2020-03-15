@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: gcr.io/pebble-rebirth/auth:gf44de2d
+          image: gcr.io/pebble-rebirth/auth:g8a43a4b
           ports:
             - containerPort: 8080
           env:
