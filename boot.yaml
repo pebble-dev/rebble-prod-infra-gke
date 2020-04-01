@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: boot
-          image: gcr.io/pebble-rebirth/boot:gefc3c13
+          image: gcr.io/pebble-rebirth/boot:g391f7f5
           ports:
             - containerPort: 8080
           env:
@@ -24,6 +24,8 @@ spec:
               value: "8080"
             - name: APPSTORE_API_URL
               value: https://appstore-api.rebble.io
+            - name: APPSTORE_API_LOCKER_URL
+              value: https://appstore-api-aws.rebble.io
             - name: APPSTORE_URL
               value: https://apps.rebble.io
             - name: ASR_ROOT
