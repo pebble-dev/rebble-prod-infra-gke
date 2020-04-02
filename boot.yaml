@@ -25,7 +25,7 @@ spec:
             - name: APPSTORE_API_URL
               value: https://appstore-api.rebble.io
             - name: APPSTORE_API_LOCKER_URL
-              value: https://appstore-api-aws.rebble.io
+              value: https://ios-appstore-api.rebble.io
             - name: APPSTORE_URL
               value: https://apps.rebble.io
             - name: ASR_ROOT
