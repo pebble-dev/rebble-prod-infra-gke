@@ -89,3 +89,10 @@ spec:
             backend:
               serviceName: appstore-api
               servicePort: 8080
+    - host: treasure.rebble.io
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: treasure
+              servicePort: 8080
