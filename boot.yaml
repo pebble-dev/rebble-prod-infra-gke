@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: boot
-          image: gcr.io/pebble-rebirth/boot:g3a3c671
+          image: gcr.io/pebble-rebirth/boot:g7bb42c9
           ports:
             - containerPort: 8080
           env:
