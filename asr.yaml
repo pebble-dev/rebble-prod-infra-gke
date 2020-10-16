@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: asr
-          image: gcr.io/pebble-rebirth/asr@sha256:e2a1848b7c4a3fff19969a1d146df9ad409cbe9afb9715841b99d1f225f95975
+          image: gcr.io/pebble-rebirth/asr@sha256:b7cb477e3ec7384a8a041da172fff112a12c5b938b1fd589c7c8ed53b4609360
           ports:
             - containerPort: 8080
           env:
