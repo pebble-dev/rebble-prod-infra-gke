@@ -10,3 +10,6 @@ resources:
   - ingress.yaml
   - ingress-nginx.yaml
   - config.yaml
+  - ws-proxy/backendconfig.yaml
+patchesStrategicMerge:
+  - ws-proxy/annotate-service.yaml

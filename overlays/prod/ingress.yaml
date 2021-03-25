@@ -89,3 +89,10 @@ spec:
             backend:
               serviceName: appstore-api
               servicePort: 8080
+    - host: "dev-ws-proxy.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ws-proxy
+              servicePort: 8080

@@ -16,3 +16,4 @@ data:
   WEATHER_ROOT: http://localhost:8080/weather
   TIMELINE_URL: http://localhost:8080/timeline-sync
   FLASK_ENV: development
+  WS_PROXY_URL: ws://localhost:8080/dev-ws-proxy/device

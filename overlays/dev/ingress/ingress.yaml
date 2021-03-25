@@ -48,3 +48,7 @@ spec:
             backend:
               serviceName: appstore-api
               servicePort: 8080
+          - path: /dev-ws-proxy
+            backend:
+              serviceName: ws-proxy
+              servicePort: 8080

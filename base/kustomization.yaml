@@ -9,6 +9,7 @@ resources:
 - notif-app-icons.yaml
 - timeline-sync.yaml
 - weather.yaml
+- ws-proxy.yaml
 images:
 - name: gcr.io/pebble-rebirth/appstore-api
   newTag: gb88f4a2
@@ -28,3 +29,5 @@ images:
   newTag: g203b75e
 - name: gcr.io/pebble-rebirth/weather
   newTag: g00433bc  
+- name: gcr.io/pebble-rebirth/dev-ws-proxy
+  newTag: g2ee6626

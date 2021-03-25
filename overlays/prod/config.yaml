@@ -16,3 +16,4 @@ data:
   WEATHER_ROOT: https://weather.rebble.io
   TIMELINE_URL: https://timeline-sync.rebble.io
   FLASK_ENV: production
+  WS_PROXY_URL: wss://dev-ws-proxy.rebble.io/device
