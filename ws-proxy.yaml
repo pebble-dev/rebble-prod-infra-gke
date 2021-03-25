@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: ws-proxy
+  name: ws-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ws-proxy
+  serviceName: ws-proxy
+  template:
+    metadata:
+      labels:
+        app: ws-proxy
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "8080"
+        - name: PEBBLE_AUTH_URL
+          value: http://auth:8080
+        - name: HONEYCOMB_KEY
+          valueFrom:
+            secretKeyRef:
+              key: key
+              name: honeycomb
+              optional: true
+        - name: PING_INTERVAL_SECONDS
+          value: "60"
+        - name: PING_TIMEOUT_SECONDS
+          value: "240"
+        image: gcr.io/pebble-rebirth/dev-ws-proxy:g2ee6626
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 20
+          timeoutSeconds: 5
+        name: ws-proxy
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 20
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 250m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws-proxy
+  annotations:
+    cloud.google.com/backend-config: '{"default": "ws-proxy-config"}'
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: ws-proxy
+  type: NodePort
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: ws-proxy-config
+spec:
+  timeoutSec: 86400

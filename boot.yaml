@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: boot
-          image: gcr.io/pebble-rebirth/boot:gb9d56ef
+          image: gcr.io/pebble-rebirth/boot:g33329d9
           ports:
             - containerPort: 8080
           env:
@@ -64,6 +64,8 @@ spec:
                   key: key
             - name: WEATHER_URL
               value: https://weather.rebble.io
+            - name: WS_PROXY_URL
+              value: wss://dev-ws-proxy.rebble.io/device
           resources:
             limits:
               cpu: 200m

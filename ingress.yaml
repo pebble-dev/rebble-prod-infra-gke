@@ -96,3 +96,10 @@ spec:
             backend:
               serviceName: treasure
               servicePort: 8080
+    - host: dev-ws-proxy.rebble.io
+      http:
+        paths:
+        - backend:
+            serviceName: ws-proxy
+            servicePort: 8080
+          path: /*
