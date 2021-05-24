@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: assets2
+  name: assets2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: assets2
+  template:
+    metadata:
+      labels:
+        app: assets2
+    spec:
+      containers:
+        - image: gcr.io/pebble-rebirth/image-resizer:v0.4
+          args:
+            - --base-url=https://storage.googleapis.com/rebble-appstore-assets/
+            - --listen=0.0.0.0:8080
+            - --max-size=720x320
+          env:
+            - name: HONEYCOMB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb
+                  key: key
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          name: assets2
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: assets2
+  annotations:
+    cloud.google.com/backend-config: '{"default": "assets2-config"}'
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: assets2
+  type: NodePort
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: assets2-config
+spec:
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: false
+      includeQueryString: true
+

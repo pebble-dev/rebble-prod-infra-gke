@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:g08cbcb8
+          image: gcr.io/pebble-rebirth/appstore-api:gbc33061
           ports:
             - containerPort: 8080
           env:
@@ -52,9 +52,9 @@ spec:
                   name: appstore-postgres
                   key: url
             - name: IMAGE_ROOT
-              value: https://assets.rebble.io
+              value: https://assets2.rebble.io
             - name: PBW_ROOT
-              value: https://pbws.rebble.io/pbw
+              value: https://storage.googleapis.com/rebble-pbws/pbw
             - name: REBBLE_AUTH_URL
               value: http://auth:8080
             - name: SECRET_KEY

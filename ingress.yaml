@@ -103,3 +103,10 @@ spec:
             serviceName: ws-proxy
             servicePort: 8080
           path: /*
+    - host: assets2.rebble.io
+      http:
+        paths:
+        - backend:
+            serviceName: assets2
+            servicePort: 8080
+          path: /*
