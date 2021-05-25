@@ -27,8 +27,8 @@ spec:
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
-                name: postgres
-                key: url_timeline
+                name: timeline-postgres
+                key: url
           - name: DOMAIN_ROOT
             value: rebble.io
           - name: HONEYCOMB_WRITEKEY
@@ -104,8 +104,8 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: postgres
-                  key: url_timeline
+                  name: timeline-postgres
+                  key: url
             - name: DOMAIN_ROOT
               value: rebble.io
             - name: HONEYCOMB_WRITEKEY
