@@ -110,3 +110,10 @@ spec:
             serviceName: assets2
             servicePort: 8080
           path: /*
+    - host: www.rebble.io
+      http:
+        paths:
+        - backend:
+            serviceName: www-redirect
+            servicePort: 8080
+          path: /*

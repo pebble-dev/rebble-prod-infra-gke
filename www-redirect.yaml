@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: www-redirect
+  name: www-redirect
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: www-redirect
+  template:
+    metadata:
+      labels:
+        app: www-redirect
+    spec:
+      containers:
+        - image: gcr.io/pebble-rebirth/simple-redirect:v0.2
+          args:
+            - --destination=https://rebble.io
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          name: www-redirect
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 50m
+              memory: 15Mi
+            requests:
+              cpu: 20m
+              memory: 10Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: www-redirect
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: www-redirect
+  type: NodePort
