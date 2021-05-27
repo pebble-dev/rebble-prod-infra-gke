@@ -15,7 +15,7 @@ spec:
         app: www-redirect
     spec:
       containers:
-        - image: gcr.io/pebble-rebirth/simple-redirect:v0.2
+        - image: gcr.io/pebble-rebirth/simple-redirect:gcb5f5a5
           args:
             - --destination=https://rebble.io
           livenessProbe:
