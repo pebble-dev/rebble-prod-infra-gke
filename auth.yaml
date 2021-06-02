@@ -74,11 +74,13 @@ spec:
               secretKeyRef:
                 name: oauth-pebble
                 key: secret
-          - name: REDIS_URL
+          - name: REDIS_PASS
             valueFrom:
               secretKeyRef:
                 name: redis
-                key: url
+                key: password
+          - name: REDIS_URL
+            value: redis://:$(REDIS_PASS)@redis/0
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
