@@ -68,11 +68,11 @@ spec:
               value: wss://dev-ws-proxy.rebble.io/device
           resources:
             limits:
-              cpu: 200m
-              memory: 128Mi
+              cpu: 100m
+              memory: 96Mi
             requests:
               cpu: 20m
-              memory: 128Mi
+              memory: 64Mi
           readinessProbe:
             httpGet:
               path: /heartbeat

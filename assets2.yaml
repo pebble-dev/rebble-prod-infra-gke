@@ -15,7 +15,7 @@ spec:
         app: assets2
     spec:
       containers:
-        - image: gcr.io/pebble-rebirth/image-resizer:v0.4
+        - image: gcr.io/pebble-rebirth/image-resizer:g1ca5dd7
           args:
             - --base-url=https://storage.googleapis.com/rebble-appstore-assets/
             - --listen=0.0.0.0:8080
@@ -45,11 +45,11 @@ spec:
             timeoutSeconds: 5
           resources:
             limits:
-              cpu: 500m
-              memory: 128Mi
+              cpu: 100m
+              memory: 64Mi
             requests:
-              cpu: 200m
-              memory: 128Mi
+              cpu: 50m
+              memory: 48Mi
 ---
 apiVersion: v1
 kind: Service

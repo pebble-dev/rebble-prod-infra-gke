@@ -47,11 +47,11 @@ spec:
             value: timeline-sync.rebble.io
           resources:
             limits:
-              cpu: 300m
-              memory: 128Mi
-            requests:
               cpu: 100m
-              memory: 128Mi
+              memory: 96Mi
+            requests:
+              cpu: 50m
+              memory: 80Mi
           readinessProbe:
             httpGet:
               path: /heartbeat
