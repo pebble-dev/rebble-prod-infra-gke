@@ -117,3 +117,10 @@ spec:
             serviceName: www-redirect
             servicePort: 8080
           path: /*
+    - host: apps.rebble.io
+      http:
+        paths:
+        - backend:
+            serviceName: appstore-legacy
+            servicePort: 8080
+          path: /*
