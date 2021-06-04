@@ -5,7 +5,7 @@ metadata:
   labels:
     app: notif-app-icons
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: notif-app-icons
@@ -29,10 +29,10 @@ spec:
                   key: key
           resources:
             limits:
-              cpu: 30m
+              cpu: 200m
               memory: 128Mi
             requests:
-              cpu: 10m
+              cpu: 200m
               memory: 96Mi
           readinessProbe:
             httpGet:
