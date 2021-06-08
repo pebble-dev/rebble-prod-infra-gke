@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-v2
+  labels:
+    app: weather-v2
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: weather-v2
+  template:
+    metadata:
+      labels:
+        app: weather-v2
+    spec:
+      containers:
+        - name: weather-v2
+          image: gcr.io/pebble-rebirth/weather:gc1f996c
+          ports:
+            - containerPort: 8080
+          env:
+          - name: PORT
+            value: "8080"
+          - name: REBBLE_AUTH_URL_INT
+            value: "http://auth:8080"
+          - name: IBM_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: ibm-weather-api-v2
+                key: key
+          - name: HONEYCOMB_KEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycomb
+                key: key
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: secret-key
+                key: key
+          - name: SERVER_NAME
+            value: weather-v2.rebble.io
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 96Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-v2
+spec:
+  selector:
+    app: weather-v2
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
