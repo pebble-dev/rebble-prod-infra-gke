@@ -5,7 +5,7 @@ metadata:
   labels:
     app: weather-v2
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: weather-v2
@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: weather-v2
+        provider-of: weather
     spec:
       containers:
         - name: weather-v2

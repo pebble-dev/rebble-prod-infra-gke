@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: weather
+        provider-of: weather
     spec:
       containers:
         - name: weather
@@ -69,7 +70,7 @@ metadata:
   name: weather
 spec:
   selector:
-    app: weather
+    provider-of: weather
   type: NodePort
   ports:
     - protocol: TCP
