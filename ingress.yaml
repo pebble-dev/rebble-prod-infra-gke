@@ -68,6 +68,13 @@ spec:
             backend:
               serviceName: weather
               servicePort: 8080
+    - host: "weather-v2.rebble.io"
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: weather-v2
+              servicePort: 8080
     - host: "notif-app-icons.rebble.io"
       http:
         paths:
