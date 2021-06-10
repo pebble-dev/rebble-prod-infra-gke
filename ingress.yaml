@@ -117,6 +117,13 @@ spec:
             serviceName: assets2
             servicePort: 8080
           path: /*
+    - host: assets.rebble.io
+      http:
+        paths:
+        - backend:
+            serviceName: assets2
+            servicePort: 8080
+          path: /*
     - host: www.rebble.io
       http:
         paths:
