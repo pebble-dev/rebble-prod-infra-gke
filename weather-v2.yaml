@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: weather-v2
-          image: gcr.io/pebble-rebirth/weather:gc1f996c
+          image: gcr.io/pebble-rebirth/weather:g9bce9e8
           ports:
             - containerPort: 8080
           env:
