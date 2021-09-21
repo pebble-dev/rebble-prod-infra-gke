@@ -70,7 +70,7 @@ metadata:
   name: weather
 spec:
   selector:
-    app: weather
+    provider-of: weather
   type: NodePort
   ports:
     - protocol: TCP
