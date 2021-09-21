@@ -5,7 +5,7 @@ metadata:
   labels:
     app: weather-v2
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: weather-v2
@@ -71,6 +71,7 @@ metadata:
 spec:
   selector:
     app: weather-v2
+    provider-of: weather
   type: NodePort
   ports:
     - protocol: TCP
