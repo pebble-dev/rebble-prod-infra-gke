@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:gf8eb183
+          image: gcr.io/pebble-rebirth/appstore-api:g2e42d65
           ports:
             - containerPort: 8080
           env:
@@ -62,6 +62,16 @@ spec:
                 secretKeyRef:
                   name: secret-key
                   key: key
+            - name: DISCORD_HOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord
+                  key: appstore-webhook
+            - name: DISCORD_ADMIN_HOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord
+                  key: appstore-admin-webhook
           resources:
             limits:
               cpu: 200m
