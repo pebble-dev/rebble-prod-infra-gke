@@ -32,14 +32,14 @@ spec:
           readinessProbe:
             httpGet:
               path: /heartbeat
-              port: 8080
+              port: 8082
             initialDelaySeconds: 10
             periodSeconds: 20
             timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /heartbeat
-              port: 8080
+              port: 8082
             initialDelaySeconds: 10
             periodSeconds: 20
             timeoutSeconds: 5
