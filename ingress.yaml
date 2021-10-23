@@ -138,3 +138,10 @@ spec:
             serviceName: appstore-legacy
             servicePort: 8080
           path: /*
+    - host: dev-portal.rebble.io
+      http:
+        paths:
+        - backend:
+            serviceName: dev-portal
+            servicePort: 8082
+          path: /*
