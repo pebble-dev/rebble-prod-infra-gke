@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:gf763a82
+          image: gcr.io/pebble-rebirth/appstore-api:gb8c7e3b
           ports:
             - containerPort: 8080
           env:
@@ -72,6 +72,16 @@ spec:
                 secretKeyRef:
                   name: discord
                   key: appstore-admin-webhook
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-iam-appstore-api
+                  key: accesskey
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-iam-appstore-api
+                  key: secretkey
           resources:
             limits:
               cpu: 200m
