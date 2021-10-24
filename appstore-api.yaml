@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:gb8c7e3b
+          image: gcr.io/pebble-rebirth/appstore-api:ge41fd1b
           ports:
             - containerPort: 8080
           env:
@@ -75,13 +75,15 @@ spec:
             - name: AWS_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aws-iam-appstore-api
+                  name: gcp-s3-appstore-api
                   key: accesskey
             - name: AWS_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aws-iam-appstore-api
+                  name: gcp-s3-appstore-api
                   key: secretkey
+            - name: S3_ENDPOINT
+              value: https://storage.googleapis.com
           resources:
             limits:
               cpu: 200m
