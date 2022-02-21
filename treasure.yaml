@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: treasure
-          image: gcr.io/pebble-rebirth/treasure:ga03c331
+          image: gcr.io/pebble-rebirth/treasure:g6c11fe8
           ports:
             - containerPort: 8080
           env:
