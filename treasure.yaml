@@ -14,9 +14,13 @@ spec:
       labels:
         app: treasure
     spec:
+      volumes:
+        - name: "svc-analytics-key"
+          secret:
+            secretName: "svc-analytics-key"
       containers:
         - name: treasure
-          image: gcr.io/pebble-rebirth/treasure:g40b6880
+          image: gcr.io/pebble-rebirth/treasure:ge67abe9
           ports:
             - containerPort: 8080
           env:
@@ -34,10 +38,15 @@ spec:
                 secretKeyRef:
                   name: secret-key
                   key: key
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "/var/run/secret/cloud.google.com/svc-analytics.json"
+          volumeMounts:
+            - name: "svc-analytics-key"
+              mountPath: "/var/run/secret/cloud.google.com"
           resources:
             limits:
-              cpu: 20m
-              memory: 64Mi
+              cpu: 100m
+              memory: 128Mi
             requests:
               cpu: 10m
               memory: 64Mi
