@@ -66,7 +66,7 @@ spec:
         paths:
           - path: /*
             backend:
-              serviceName: weather
+              serviceName: weather-v2
               servicePort: 8080
     - host: "weather-v2.rebble.io"
       http:
