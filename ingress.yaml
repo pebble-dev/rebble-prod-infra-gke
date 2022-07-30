@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rebble-ingress
@@ -15,133 +15,190 @@ spec:
     - host: cohorts.rebble.io
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: cohorts
-              servicePort: 8080
+              service:
+                name: cohorts
+                port:
+                  number: 8080
     - host: boot.rebble.io
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: boot
-              servicePort: 8080
+              service:
+                name: boot
+                port:
+                  number: 8080
     - host: auth.rebble.io
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: auth
-              servicePort: 8080
+              service:
+                name: auth
+                port:
+                  number: 8080
     - host: timeline-sync.rebble.io
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: timeline-sync
-              servicePort: 8080
+              service:
+                name: timeline-sync
+                port:
+                  number: 8080
     - host: timeline-api.rebble.io
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: timeline-sync
-              servicePort: 8080
+              service:
+                name: timeline-sync
+                port:
+                  number: 8080
     - host: "*.asr.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: asr
-              servicePort: 8080
+              service:
+                name: asr
+                port:
+                  number: 8080
     - host: "lp.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: lp
-              servicePort: 8080
+              service:
+                name: lp
+                port:
+                  number: 8080
     - host: "weather.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: weather-v2
-              servicePort: 8080
+              service:
+                name: weather-v2
+                port:
+                  number: 8080
     - host: "weather-v2.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: weather-v2
-              servicePort: 8080
+              service:
+                name: weather-v2
+                port:
+                  number: 8080
     - host: "notif-app-icons.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: notif-app-icons
-              servicePort: 8080
+              service:
+                name: notif-app-icons
+                port:
+                  number: 8080
     - host: "appstore-api.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: appstore-api
-              servicePort: 8080
+              service:
+                name: appstore-api
+                port:
+                  number: 8080
     - host: "ios-appstore-api.rebble.io"
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: appstore-api
-              servicePort: 8080
+              service:
+                name: appstore-api
+                port:
+                  number: 8080
     - host: treasure.rebble.io
       http:
         paths:
-          - path: /*
+          - path: /
+            pathType: Prefix
             backend:
-              serviceName: treasure
-              servicePort: 8080
+              service:
+                name: treasure
+                port:
+                  number: 8080
     - host: dev-ws-proxy.rebble.io
       http:
         paths:
         - backend:
-            serviceName: ws-proxy
-            servicePort: 8080
-          path: /*
+            service:
+              name: ws-proxy
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
     - host: assets2.rebble.io
       http:
         paths:
         - backend:
-            serviceName: assets2
-            servicePort: 8080
-          path: /*
+            service:
+              name: assets2
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
     - host: assets.rebble.io
       http:
         paths:
         - backend:
-            serviceName: assets2
-            servicePort: 8080
-          path: /*
+            service:
+              name: assets2
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
     - host: www.rebble.io
       http:
         paths:
         - backend:
-            serviceName: www-redirect
-            servicePort: 8080
-          path: /*
+            service:
+              name: www-redirect
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
     - host: apps.rebble.io
       http:
         paths:
         - backend:
-            serviceName: appstore-legacy
-            servicePort: 8080
-          path: /*
+            service:
+              name: appstore-legacy
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
     - host: dev-portal.rebble.io
       http:
         paths:
         - backend:
-            serviceName: dev-portal
-            servicePort: 8082
-          path: /*
+            service:
+              name: dev-portal
+              port:
+                number: 8082
+          path: /
+          pathType: Prefix
