@@ -81,7 +81,7 @@ spec:
     - protocol: TCP
       port: 8080
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: timeline-sync-maintenance
