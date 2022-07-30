@@ -1,25 +1,32 @@
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: star-rebble-io
-  namespace: default
-spec:
-  secretName: star-rebble-io
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  dnsNames:
-  - "*.rebble.io"
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: star-asr-rebble-io
-  namespace: default
-spec:
-  secretName: star-asr-rebble-io
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
-  dnsNames:
-  - "*.asr.rebble.io"
+apiVersion: v1
+items:
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: null
+    name: star-rebble-io
+    namespace: default
+  spec:
+    dnsNames:
+    - '*.rebble.io'
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+    secretName: star-rebble-io
+  status: {}
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: null
+    name: star-asr-rebble-io
+    namespace: default
+  spec:
+    dnsNames:
+    - '*.asr.rebble.io'
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+    secretName: star-asr-rebble-io
+  status: {}
+kind: List
+metadata: {}

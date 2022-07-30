@@ -1,16 +1,17 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
+  creationTimestamp: null
   name: letsencrypt-prod
 spec:
   acme:
     email: katharine@kathar.in
-    server: https://acme-v02.api.letsencrypt.org/directory
+    preferredChain: ""
     privateKeySecretRef:
-      # Secret resource that will be used to store the account's private key.
       name: letsencrypt-prod-account-key
-    # Add a single challenge solver, HTTP01 using nginx
+    server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
-      - dns01:
-          clouddns:
-            project: pebble-rebirth
+    - dns01:
+        cloudDNS:
+          project: pebble-rebirth
+status: {}

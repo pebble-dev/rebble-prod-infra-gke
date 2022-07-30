@@ -1,12 +1,14 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  creationTimestamp: null
   name: staging-star-rebble-io
   namespace: default
 spec:
-  secretName: staging-star-rebble-io
-  issuerRef:
-    name: letsencrypt-staging
-    kind: ClusterIssuer
   dnsNames:
-  - "*.rebble.io"
+  - '*.rebble.io'
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  secretName: staging-star-rebble-io
+status: {}

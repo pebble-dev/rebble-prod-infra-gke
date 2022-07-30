@@ -1,14 +1,17 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
+  creationTimestamp: null
   name: letsencrypt-staging
 spec:
   acme:
     email: katharine@kathar.in
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    preferredChain: ""
     privateKeySecretRef:
       name: letsencrypt-staging-account-key
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
     solvers:
-      - dns01:
-          clouddns:
-            project: pebble-rebirth
+    - dns01:
+        cloudDNS:
+          project: pebble-rebirth
+status: {}
