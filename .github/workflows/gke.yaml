@@ -34,8 +34,8 @@ jobs:
     - name: Deploy
       run: |-
           echo "Current diff:"
-          kubectl diff -f cluster/ || true
+          kubectl diff -Rf cluster/ || true
           echo "Applying..."
-          kubectl apply -f cluster/
+          kubectl apply -Rf cluster/
           echo "New diff:"
-          kubectl diff -f cluster/
+          kubectl diff -Rf cluster/
