@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: gcr.io/pebble-rebirth/auth:gb9310c6
+          image: gcr.io/pebble-rebirth/auth:g7490af3
           ports:
             - containerPort: 8080
           env:
@@ -29,10 +29,6 @@ spec:
                 key: url
           - name: DOMAIN_ROOT
             value: rebble.io
-          - name: COBBLE_OAUTH_CLIENT_ID
-            value: wY4zqNmb1jem1Ckq0lJORoJD
-          - name: REBBLE_ACCOUNT_URL
-            value: https://auth.rebble.io/account
           - name: FACEBOOK_CONSUMER_KEY
             valueFrom:
               secretKeyRef:
