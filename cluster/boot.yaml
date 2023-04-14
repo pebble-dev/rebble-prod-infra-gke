@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: boot
-          image: gcr.io/pebble-rebirth/boot:ge8f5afd
+          image: gcr.io/pebble-rebirth/boot:gb9310c6
           ports:
             - containerPort: 8080
           env:
@@ -30,6 +30,8 @@ spec:
               value: https://apps.rebble.io
             - name: ASR_ROOT
               value: asr.rebble.io
+            - name: COBBLE_OAUTH_CLIENT_ID
+              value: wY4zqNmb1jem1Ckq0lJORoJD
             - name: COHORTS_URL
               value: https://cohorts.rebble.io
             - name: DOMAIN_ROOT
@@ -41,6 +43,8 @@ spec:
                   key: key
             - name: LANGUAGE_PACK_URL
               value: https://lp.rebble.io
+            - name: REBBLE_ACCOUNT_URL
+              value: https://auth.rebble.io/account
             - name: REBBLE_AUTH_URL
               value: https://auth.rebble.io
             - name: REBBLE_AUTH_INT_URL
