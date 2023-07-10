@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-identifier
+  labels:
+    app: user-identifier
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-identifier
+  template:
+    metadata:
+      labels:
+        app: user-identifier
+    spec:
+      containers:
+        - name: user-identifier
+          image: gcr.io/pebble-rebirth/user-identifier:v0.0.3
+          ports:
+            - containerPort: 8080
+          env:
+          - name: PORT
+            value: "8080"
+          - name: TIMELINE_DATABASE_URI
+            valueFrom:
+              secretKeyRef:
+                name: timeline-postgres
+                key: url
+          - name: AUTH_DATABASE_URI
+            valueFrom:
+              secretKeyRef:
+                name: postgres
+                key: url
+          - name: APPSTORE_DATABASE_URI
+            valueFrom:
+              secretKeyRef:
+                name: appstore-postgres
+                key: url
+          - name: HONEYCOMB_WRITEKEY
+            valueFrom:
+              secretKeyRef:
+                name: honeycomb
+                key: key
+          - name: HONEYCOMB_DATASET
+            value: rws
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 96Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-identifier
+spec:
+  selector:
+    app: user-identifier
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
