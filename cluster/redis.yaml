@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:5.0-32bit
+          image: redis:7.0
           args:
             - --requirepass
             - $(REDIS_PASS)
