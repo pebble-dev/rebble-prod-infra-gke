@@ -202,3 +202,13 @@ spec:
                 number: 8082
           path: /
           pathType: Prefix
+    - host: bobby-api.rebble.io
+      http:
+        paths:
+        - backend:
+            service:
+              name: bobby
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
