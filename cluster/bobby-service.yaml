@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bobby
-          image: gcr.io/pebble-rebirth/bobby-service:v0.0.11
+          image: gcr.io/pebble-rebirth/bobby-service:v0.0.12
           ports:
             - containerPort: 8080
           env:
