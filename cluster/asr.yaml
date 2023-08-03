@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: asr
-          image: gcr.io/pebble-rebirth/asr:g37302eb
+          image: gcr.io/pebble-rebirth/asr:g1419105
           ports:
             - containerPort: 8080
           env:
