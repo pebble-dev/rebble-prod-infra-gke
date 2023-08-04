@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bobby
-          image: gcr.io/pebble-rebirth/bobby-service:v0.0.13
+          image: gcr.io/pebble-rebirth/bobby-service:v0.0.14
           ports:
             - containerPort: 8080
           env:
@@ -49,6 +49,11 @@ spec:
               secretKeyRef:
                 name: openai
                 key: key
+          - name: OPENAI_ORG
+            valueFrom:
+              secretKeyRef:
+                name: openai
+                key: org
           - name: HERE_KEY
             valueFrom:
               secretKeyRef:
