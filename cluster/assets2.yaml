@@ -15,7 +15,7 @@ spec:
         app: assets2
     spec:
       containers:
-        - image: gcr.io/pebble-rebirth/image-resizer:g29521b8
+        - image: gcr.io/pebble-rebirth/image-resizer:g6ca55e1
           args:
             - --base-url=https://storage.googleapis.com/rebble-appstore-assets/
             - --listen=0.0.0.0:8080
