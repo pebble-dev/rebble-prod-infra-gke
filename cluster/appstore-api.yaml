@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:ga89896e
+          image: gcr.io/pebble-rebirth/appstore-api:g141af33
           ports:
             - containerPort: 8080
           env:
