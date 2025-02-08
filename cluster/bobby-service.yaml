@@ -44,16 +44,11 @@ spec:
                 key: password
           - name: REDIS_URL
             value: redis://:$(REDIS_PASS)@redis/1
-          - name: OPENAI_KEY
+          - name: GEMINI_KEY
             valueFrom:
               secretKeyRef:
-                name: openai
+                name: gemini
                 key: key
-          - name: OPENAI_ORG
-            valueFrom:
-              secretKeyRef:
-                name: openai
-                key: org
           - name: HERE_KEY
             valueFrom:
               secretKeyRef:
