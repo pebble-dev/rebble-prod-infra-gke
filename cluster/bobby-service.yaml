@@ -59,6 +59,11 @@ spec:
               secretKeyRef:
                 name: here
                 key: key
+          - name: DISCORD_FEEDBACK_URL
+            valueFrom:
+              secretKeyRef:
+                name: bobby-discord-feedback-webhook
+                key: url
           resources:
             limits:
               cpu: 200m
