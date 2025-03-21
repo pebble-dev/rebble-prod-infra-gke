@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bobby
-          image: ghcr.io/pebble-dev/bobby-assistant:gd4be369
+          image: ghcr.io/pebble-dev/bobby-assistant:gbcd17df
           ports:
             - containerPort: 8080
           env:
@@ -42,6 +42,8 @@ spec:
                 key: key
           - name: USER_IDENTIFICATION_URL
             value: http://user-identifier:8080/api/v1/token_info
+          - name: BASE_URL
+            value: https://bobby-api.rebble.io
           - name: REDIS_PASS
             valueFrom:
               secretKeyRef:
