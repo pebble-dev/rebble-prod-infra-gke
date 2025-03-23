@@ -28,5 +28,16 @@ items:
       name: letsencrypt-prod
     secretName: star-asr-rebble-io
   status: {}
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: star-asr-test-rebble-io
+    namespace: default
+  spec:
+    dnsNames:
+    - '*.asr-test.rebble.io'
+    issuerRef:
+      kind: ClusterIssuer
+      name: letsencrypt-prod
+    secretName: star-asr-test-rebble-io
 kind: List
-metadata: {}

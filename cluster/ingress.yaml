@@ -11,6 +11,9 @@ spec:
     - secretName: star-asr-rebble-io
       hosts:
         - "*.asr.rebble.io"
+    - secretName: star-asr-test-rebble-io
+      hosts:
+        - "*.asr-test.rebble.io"
   rules:
     - host: cohorts.rebble.io
       http:
@@ -70,6 +73,16 @@ spec:
             backend:
               service:
                 name: asr
+                port:
+                  number: 8080
+    - host: "*.asr-test.rebble.io"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: asr-test
                 port:
                   number: 8080
     - host: "lp.rebble.io"
