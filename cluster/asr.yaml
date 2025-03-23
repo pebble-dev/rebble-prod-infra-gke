@@ -14,6 +14,7 @@ spec:
       labels:
         app: asr
     spec:
+      serviceAccountName: rebble-asr-sa
       containers:
         - name: asr
           image: gcr.io/pebble-rebirth/asr:g6f8528c
@@ -60,7 +61,7 @@ metadata:
   name: asr
 spec:
   selector:
-    app: asr
+    app: asr-test
   type: NodePort
   ports:
     - protocol: TCP
