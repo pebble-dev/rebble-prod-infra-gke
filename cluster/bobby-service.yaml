@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bobby
-          image: ghcr.io/pebble-dev/bobby-assistant:g7aa2cdd
+          image: ghcr.io/pebble-dev/bobby-assistant:ga5ac329
           ports:
             - containerPort: 8080
           env:
