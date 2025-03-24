@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audio-debug
+  labels:
+    app: audio-debug
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: audio-debug
+  template:
+    metadata:
+      labels:
+        app: audio-debug
+    spec:
+      serviceAccountName: rebble-asr-sa
+      containers:
+        - name: audio-debug
+          image: gcr.io/pebble-rebirth/audio-debug-mode:test-4
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OAUTH_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: audio-debug-secrets
+                  key: oauth_client_id
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: audio-debug-secrets
+                  key: oauth_client_secret
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: audio-debug-secrets
+                  key: session_secret
+            - name: REBBLE_AUTH_URL
+              value: https://auth.rebble.io/oauth/authorise
+            - name: REBBLE_TOKEN_URL
+              value: https://auth.rebble.io/oauth/token
+            - name: REBBLE_USER_INFO_URL
+              value: https://auth.rebble.io/api/v1/me
+            - name: OAUTH_CALLBACK_URL
+              value: https://audio-debug.rebble.io/auth/callback
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 96Mi
+          readinessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /heartbeat
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: audio-debug
+spec:
+  selector:
+    app: audio-debug
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8000

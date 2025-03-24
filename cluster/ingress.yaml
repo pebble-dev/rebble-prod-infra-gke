@@ -225,3 +225,13 @@ spec:
                 number: 8080
           path: /
           pathType: Prefix
+    - host: audio-debug.rebble.io
+      http:
+        paths:
+        - backend:
+            service:
+              name: audio-debug
+              port:
+                number: 8000
+          path: /
+          pathType: Prefix
