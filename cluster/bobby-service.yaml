@@ -17,7 +17,7 @@ spec:
       serviceAccountName: bobby-sa
       containers:
         - name: bobby
-          image: ghcr.io/pebble-dev/bobby-assistant:gb1e35f5
+          image: ghcr.io/pebble-dev/bobby-assistant:g07e71af
           ports:
             - containerPort: 8080
           env:
@@ -67,6 +67,21 @@ spec:
               secretKeyRef:
                 name: bobby-discord-feedback-webhook
                 key: url
+          - name: GOOGLE_MAPS_STATIC_KEY
+            valueFrom:
+              secretKeyRef:
+                name: google-maps-secrets
+                key: static-key
+          - name: GOOGLE_MAPS_STATIC_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: google-maps-secrets
+                key: static-secret
+          - name: GOOGLE_MAPS_STATIC_MAP_ID
+            valueFrom:
+              secretKeyRef:
+                name: google-maps-secrets
+                key: map-id
           resources:
             limits:
               cpu: 200m
