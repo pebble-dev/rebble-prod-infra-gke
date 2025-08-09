@@ -20,7 +20,7 @@ spec:
             secretName: "svc-analytics-key"
       containers:
         - name: treasure
-          image: gcr.io/pebble-rebirth/treasure:ge67abe9
+          image: gcr.io/pebble-rebirth/treasure:g848ae25
           ports:
             - containerPort: 8080
           env:
