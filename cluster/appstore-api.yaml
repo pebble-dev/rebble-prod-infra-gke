@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:gcec5b4e
+          image: gcr.io/pebble-rebirth/appstore-api:gad8f2d0
           ports:
             - containerPort: 8080
           env:
@@ -84,6 +84,8 @@ spec:
                   key: secretkey
             - name: S3_ENDPOINT
               value: https://storage.googleapis.com
+            - name: TEST_APP_UUID
+              value: db9af49b-065a-442c-8042-08b812317de4
           resources:
             limits:
               cpu: 200m
