@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cohorts
-          image: gcr.io/pebble-rebirth/cohorts:g75bf5c4
+          image: gcr.io/pebble-rebirth/cohorts:gb009f99
           ports:
             - containerPort: 8080
           env:
