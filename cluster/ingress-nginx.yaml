@@ -22,6 +22,47 @@ spec:
                 name: appstore-api
                 port:
                   number: 8080
+    - host: android-timeline-sync.rebble.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: timeline-sync
+                port:
+                  number: 8080
+    - host: android-timeline-api.rebble.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: timeline-sync
+                port:
+                  number: 8080
+
+    - host: timeline-sync.rebble.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: timeline-sync
+                port:
+                  number: 8080
+    - host: timeline-api.rebble.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: timeline-sync
+                port:
+                  number: 8080
     - host: "appstore-api.rebble.io"
       http:
         paths:
