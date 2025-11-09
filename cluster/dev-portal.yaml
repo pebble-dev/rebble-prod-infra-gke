@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dev-portal
-          image: gcr.io/pebble-rebirth/dev-portal:g080b8be
+          image: gcr.io/pebble-rebirth/dev-portal:g04b8ebe
           ports:
             - containerPort: 8082
           env:
