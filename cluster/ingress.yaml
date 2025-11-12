@@ -235,3 +235,13 @@ spec:
                 number: 8000
           path: /
           pathType: Prefix
+    - host: developer-api.rebble.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: developer-api
+                port:
+                  number: 8080
