@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: gcr.io/pebble-rebirth/auth:g5f433ad
+          image: gcr.io/pebble-rebirth/auth:g4fe4858
           ports:
             - containerPort: 8080
           env:
@@ -122,6 +122,11 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: oauth-twitter
+                key: secret
+          - name: DISCOURSE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: discourse
                 key: secret
           resources:
             limits:
