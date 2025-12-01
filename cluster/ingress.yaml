@@ -235,3 +235,13 @@ spec:
                 number: 8000
           path: /
           pathType: Prefix
+    - host: forums.rebble.io
+      http:
+        paths:
+        - backend:
+            service:
+              name: discourse
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
