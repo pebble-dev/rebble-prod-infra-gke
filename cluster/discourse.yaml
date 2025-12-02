@@ -29,8 +29,6 @@ spec:
           env:
             - name: DISCOURSE_HOSTNAME
               value: "forums.rebble.io"
-            - name: DISCOURSE_PORT
-              value: "80"
             - name: DISCOURSE_DB_HOST
               valueFrom:
                 secretKeyRef:
