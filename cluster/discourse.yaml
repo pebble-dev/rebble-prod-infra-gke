@@ -18,12 +18,12 @@ spec:
         - name: discourse
           image: discourse/discourse:3.5.2
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           env:
             - name: DISCOURSE_HOSTNAME
               value: "forums.rebble.io"
             - name: DISCOURSE_PORT
-              value: "8080"
+              value: "80"
             - name: DISCOURSE_DB_HOST
               valueFrom:
                 secretKeyRef:
@@ -79,7 +79,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 80
             initialDelaySeconds: 1800
             periodSeconds: 30
             timeoutSeconds: 5
@@ -87,7 +87,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 8080
+              port: 80
             initialDelaySeconds: 1800
             periodSeconds: 30
             timeoutSeconds: 5
@@ -103,4 +103,4 @@ spec:
   type: NodePort
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
