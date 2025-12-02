@@ -14,11 +14,18 @@ spec:
       labels:
         app: discourse
     spec:
+      volumes:
+        - name: discourse-vol
+          persistentVolumeClaim:
+            claimName: discourse
       containers:
         - name: discourse
           image: discourse/discourse:3.5.2
           ports:
             - containerPort: 80
+          volumeMounts:
+            - mountPath: "/shared"
+              name: discourse-vol
           env:
             - name: DISCOURSE_HOSTNAME
               value: "forums.rebble.io"
@@ -104,3 +111,15 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: discourse
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: standard-rwo
