@@ -94,7 +94,7 @@ spec:
             - name: DISCOURSE_USER
               value: annedroid
             - name: DISCOURSE_SHOWCASE_TOPIC_ID
-              value: 3
+              value: "3"
           resources:
             limits:
               cpu: 200m
