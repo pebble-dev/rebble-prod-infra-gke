@@ -59,9 +59,15 @@ spec:
                   name: discourse-redis
                   key: password
             - name: DISCOURSE_SMTP_ADDRESS
-              value: "smtp-relay.gmail.com"
+              valueFrom:
+                secretKeyRef:
+                  name: discourse-smtp
+                  key: address
             - name: DISCOURSE_SMTP_PORT
-              value: "587"
+              valueFrom:
+                secretKeyRef:
+                  name: discourse-smtp
+                  key: port
             - name: DISCOURSE_SMTP_USERNAME
               valueFrom:
                 secretKeyRef:
