@@ -68,7 +68,7 @@ spec:
                 secretKeyRef:
                   name: discourse-smtp
                   key: port
-            - name: DISCOURSE_SMTP_USERNAME
+            - name: DISCOURSE_SMTP_USER_NAME
               valueFrom:
                 secretKeyRef:
                   name: discourse-smtp
