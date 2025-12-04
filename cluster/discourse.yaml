@@ -28,7 +28,7 @@ spec:
               name: discourse-vol
           env:
             - name: DISCOURSE_HOSTNAME
-              value: "forums.rebble.io"
+              value: "forum.rebble.io"
             - name: DISCOURSE_DB_HOST
               valueFrom:
                 secretKeyRef:
