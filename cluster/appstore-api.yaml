@@ -92,7 +92,7 @@ spec:
                   name: discourse-bot-key
                   key: key
             - name: DISCOURSE_USER
-              value: annedroid
+              value: anne_droid
             - name: DISCOURSE_SHOWCASE_TOPIC_ID
               value: "3"
           resources:
