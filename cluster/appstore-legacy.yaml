@@ -15,7 +15,7 @@ spec:
         app: appstore-legacy
     spec:
       containers:
-        - image: gcr.io/pebble-rebirth/appstore-legacy:v0.1
+        - image: gcr.io/pebble-rebirth/appstore-legacy:v0.2
           livenessProbe:
             httpGet:
               path: /healthz
