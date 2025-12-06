@@ -6,12 +6,24 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/server-snippet: |
+      if ($host = "forums.rebble.io") { rewrite / $scheme://forum.rebble.io$uri permanent; }
 spec:
   tls:
     - secretName: star-rebble-io
       hosts:
         - "*.rebble.io"
   rules:
+    - host: "forums.rebble.io"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: discourse
+                port:
+                  number: 80
     - host: "android-appstore-api.rebble.io"
       http:
         paths:
