@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:gb341b1b
+          image: gcr.io/pebble-rebirth/appstore-api:g3383852
           ports:
             - containerPort: 8080
           env:
@@ -128,3 +128,175 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: appstore-api-weekly
+spec:
+  schedule: "@weekly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: appstore-api-weekly
+            image: gcr.io/pebble-rebirth/appstore-api:g3383852
+            args:
+            - flask
+            - apps
+            - random-weekly
+          env:
+            - name: PORT
+              value: "8080"
+            - name: HONEYCOMB_WRITEKEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb
+                  key: key
+            - name: HONEYCOMB_DATASET
+              value: rws
+            - name: ALGOLIA_ADMIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: algolia
+                  key: admin-api-key
+            - name: ALGOLIA_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: algolia
+                  key: app-id
+            - name: ALGOLIA_INDEX
+              valueFrom:
+                secretKeyRef:
+                  name: algolia
+                  key: index
+            - name: APPSTORE_ROOT
+              value: https://apps.rebble.io
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: appstore-postgres
+                  key: url
+            - name: IMAGE_ROOT
+              value: https://assets2.rebble.io
+            - name: PBW_ROOT
+              value: https://storage.googleapis.com/rebble-pbws/pbw
+            - name: REBBLE_AUTH_URL
+              value: http://auth:8080
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-key
+                  key: key
+            - name: DISCORD_HOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord
+                  key: appstore-webhook
+            - name: DISCORD_ADMIN_HOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord
+                  key: appstore-admin-webhook
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-s3-appstore-api
+                  key: accesskey
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-s3-appstore-api
+                  key: secretkey
+            - name: S3_ENDPOINT
+              value: https://storage.googleapis.com
+            - name: TEST_APP_UUID
+              value: db9af49b-065a-442c-8042-08b812317de4
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: appstore-api-daily
+spec:
+  schedule: "@daily"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: appstore-api-daily
+            image: gcr.io/pebble-rebirth/appstore-api:g3383852
+            args:
+            - flask
+            - apps
+            - daily-hearts
+          env:
+            - name: PORT
+              value: "8080"
+            - name: HONEYCOMB_WRITEKEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb
+                  key: key
+            - name: HONEYCOMB_DATASET
+              value: rws
+            - name: ALGOLIA_ADMIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: algolia
+                  key: admin-api-key
+            - name: ALGOLIA_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: algolia
+                  key: app-id
+            - name: ALGOLIA_INDEX
+              valueFrom:
+                secretKeyRef:
+                  name: algolia
+                  key: index
+            - name: APPSTORE_ROOT
+              value: https://apps.rebble.io
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: appstore-postgres
+                  key: url
+            - name: IMAGE_ROOT
+              value: https://assets2.rebble.io
+            - name: PBW_ROOT
+              value: https://storage.googleapis.com/rebble-pbws/pbw
+            - name: REBBLE_AUTH_URL
+              value: http://auth:8080
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-key
+                  key: key
+            - name: DISCORD_HOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord
+                  key: appstore-webhook
+            - name: DISCORD_ADMIN_HOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: discord
+                  key: appstore-admin-webhook
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-s3-appstore-api
+                  key: accesskey
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-s3-appstore-api
+                  key: secretkey
+            - name: S3_ENDPOINT
+              value: https://storage.googleapis.com
+            - name: TEST_APP_UUID
+              value: db9af49b-065a-442c-8042-08b812317de4
+          restartPolicy: OnFailure
