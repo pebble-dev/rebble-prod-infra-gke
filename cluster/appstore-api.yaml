@@ -141,8 +141,8 @@ spec:
         spec:
           containers:
           - name: appstore-api-weekly
-            image: gcr.io/pebble-rebirth/appstore-api:gf66a252
-            args:
+            image: gcr.io/pebble-rebirth/appstore-api:g6e5e350
+            command:
             - flask
             - apps
             - random-weekly
@@ -227,8 +227,8 @@ spec:
         spec:
           containers:
           - name: appstore-api-daily
-            image: gcr.io/pebble-rebirth/appstore-api:gf66a252
-            args:
+            image: gcr.io/pebble-rebirth/appstore-api:g6e5e350
+            command:
             - flask
             - apps
             - daily-hearts
