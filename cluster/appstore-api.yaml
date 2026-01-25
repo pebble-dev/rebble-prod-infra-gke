@@ -148,6 +148,8 @@ spec:
             - apps
             - random-weekly
             env:
+              - name: FLASK_APP
+                value: appstore:app
               - name: PORT
                 value: "8080"
               - name: HONEYCOMB_WRITEKEY
@@ -235,6 +237,8 @@ spec:
             - apps
             - daily-hearts
             env:
+              - name: FLASK_APP
+                value: appstore:app
               - name: PORT
                 value: "8080"
               - name: HONEYCOMB_WRITEKEY
