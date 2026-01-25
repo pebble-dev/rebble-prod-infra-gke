@@ -144,6 +144,7 @@ spec:
             image: gcr.io/pebble-rebirth/appstore-api:g6e5e350
             command:
             - flask
+            args:
             - apps
             - random-weekly
             env:
@@ -230,6 +231,7 @@ spec:
             image: gcr.io/pebble-rebirth/appstore-api:g6e5e350
             command:
             - flask
+            args:
             - apps
             - daily-hearts
             env:
