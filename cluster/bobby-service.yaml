@@ -17,7 +17,7 @@ spec:
       serviceAccountName: bobby-sa
       containers:
         - name: bobby
-          image: ghcr.io/pebble-dev/bobby-assistant:gc673f25
+          image: ghcr.io/pebble-dev/bobby-assistant:g9644b40
           ports:
             - containerPort: 8080
           env:
