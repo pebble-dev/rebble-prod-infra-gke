@@ -20,7 +20,7 @@ spec:
             claimName: discourse
       containers:
         - name: discourse
-          image: discourse/discourse:3.5.2
+          image: discourse/discourse:2026.1.1
           ports:
             - containerPort: 80
           volumeMounts:
