@@ -17,7 +17,7 @@ spec:
       serviceAccountName: rebble-asr-sa
       containers:
         - name: asr-test
-          image: gcr.io/pebble-rebirth/asr:g304a9e5
+          image: gcr.io/pebble-rebirth/asr:g255d87c
           ports:
             - containerPort: 8080
           env:
