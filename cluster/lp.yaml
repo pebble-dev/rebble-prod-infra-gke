@@ -16,12 +16,21 @@ spec:
     spec:
       containers:
         - name: lp
-          image: gcr.io/pebble-rebirth/lp:g07f80a3
+          image: gcr.io/pebble-rebirth/lp:g7143400
           ports:
             - containerPort: 8080
           env:
             - name: PORT
               value: "8080"
+            - name: DOMAIN_ROOT
+              value: rebble.io
+            - name: S3_PATH
+              value: lp
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: languages-db
+                  key: url
             - name: HONEYCOMB_KEY
               valueFrom:
                 secretKeyRef:
