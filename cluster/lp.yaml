@@ -38,11 +38,11 @@ spec:
                   key: key
           resources:
             limits:
-              cpu: 30m
-              memory: 128Mi
+              cpu: 150m
+              memory: 192Mi
             requests:
-              cpu: 15m
-              memory: 96Mi
+              cpu: 50m
+              memory: 128Mi
           readinessProbe:
             httpGet:
               path: /heartbeat
