@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: lp
-          image: gcr.io/pebble-rebirth/lp:geb6bd47
+          image: gcr.io/pebble-rebirth/lp:gb89e8bd
           ports:
             - containerPort: 8080
           env:
