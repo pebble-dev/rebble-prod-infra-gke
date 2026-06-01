@@ -65,11 +65,11 @@ spec:
                   key: url
           resources:
             limits:
-              cpu: 50m
-              memory: 96Mi
+              cpu: 100m
+              memory: 192Mi
             requests:
-              cpu: 25m
-              memory: 64Mi
+              cpu: 50m
+              memory: 128Mi
           readinessProbe:
             httpGet:
               path: /heartbeat
