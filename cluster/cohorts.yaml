@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cohorts
-          image: gcr.io/pebble-rebirth/cohorts:gb61462b
+          image: gcr.io/pebble-rebirth/cohorts:g02eafff
           ports:
             - containerPort: 8080
           env:
@@ -58,6 +58,11 @@ spec:
                   key: key
             - name: WEATHER_URL
               value: https://weather.rebble.io
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: cohorts-db
+                  key: url
           resources:
             limits:
               cpu: 50m
