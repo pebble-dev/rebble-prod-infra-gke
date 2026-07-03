@@ -17,7 +17,7 @@ spec:
       serviceAccountName: cluster-dashboard-sa
       containers:
         - name: cluster-dashboard
-          image: gcr.io/pebble-rebirth/cluster-dashboard:ge61fdf9
+          image: gcr.io/pebble-rebirth/cluster-dashboard:g514fbfe
           ports:
             - containerPort: 8080
           env:
