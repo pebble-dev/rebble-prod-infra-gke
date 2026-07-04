@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: timeline-sync
-          image: gcr.io/pebble-rebirth/timeline-sync:g797aa32
+          image: gcr.io/pebble-rebirth/timeline-sync:g4046b61
           ports:
             - containerPort: 8080
           env:
