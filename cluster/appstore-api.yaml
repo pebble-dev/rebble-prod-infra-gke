@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appstore-api
-          image: gcr.io/pebble-rebirth/appstore-api:g02c4a4d
+          image: gcr.io/pebble-rebirth/appstore-api:gcf061e3
           ports:
             - containerPort: 8080
           env:
@@ -141,7 +141,7 @@ spec:
         spec:
           containers:
           - name: appstore-api-weekly
-            image: gcr.io/pebble-rebirth/appstore-api:g53ac478
+            image: gcr.io/pebble-rebirth/appstore-api:gcf061e3
             command:
             - flask
             args:
@@ -230,7 +230,7 @@ spec:
         spec:
           containers:
           - name: appstore-api-daily
-            image: gcr.io/pebble-rebirth/appstore-api:g53ac478
+            image: gcr.io/pebble-rebirth/appstore-api:gcf061e3
             command:
             - flask
             args:
